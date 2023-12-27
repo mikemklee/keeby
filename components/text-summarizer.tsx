@@ -21,26 +21,19 @@ const TextSummarizer = () => {
   const [fullText, setFullText] = useState(DUMMY_TEXT_TO_SUMMARIZE);
   const [summary, setSummary] = useState("");
 
-  async function query(data: any) {
+  const onClickButton = async () => {
     try {
       setLoading(true);
       setError("");
 
       const response = await axios.post(
-        "https://api-inference.huggingface.co/models/Falconsai/text_summarization",
-        JSON.stringify(data),
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_HUGGING_FACE_API_TOKEN}`,
-          },
-        }
+        "/api/summary/text",
+        JSON.stringify({
+          fullText,
+        })
       );
-
-      const result = await response.data;
-
-      const summary = result[0].summary_text;
-
-      return summary;
+      const { summary } = response.data;
+      setSummary(summary);
     } catch (error) {
       if (error instanceof AxiosError) {
         const { response } = error;
@@ -51,14 +44,6 @@ const TextSummarizer = () => {
     } finally {
       setLoading(false);
     }
-  }
-
-  const onCLickButton = async () => {
-    const response = await query({
-      inputs: fullText,
-    });
-
-    setSummary(response);
   };
 
   const onCopy = () => {
@@ -88,7 +73,7 @@ const TextSummarizer = () => {
         )}
         {}
       </div>
-      <Button onClick={onCLickButton} disabled={!fullText}>
+      <Button onClick={onClickButton} disabled={!fullText}>
         Summarize this
       </Button>
 
