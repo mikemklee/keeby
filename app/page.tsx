@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -13,12 +13,16 @@ const DUMMY_TEXT_TO_SUMMARIZE =
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const [fullText, setFullText] = useState(DUMMY_TEXT_TO_SUMMARIZE);
   const [summary, setSummary] = useState("");
 
   async function query(data: any) {
     try {
       setLoading(true);
+      setError("");
+
       const response = await axios.post(
         "https://api-inference.huggingface.co/models/Falconsai/text_summarization",
         JSON.stringify(data),
@@ -28,13 +32,19 @@ export default function Home() {
           },
         }
       );
+
       const result = await response.data;
 
       const summary = result[0].summary_text;
 
       return summary;
     } catch (error) {
-      console.error("hugging face API call error", error);
+      if (error instanceof AxiosError) {
+        const { response } = error;
+
+        console.error("API error", error);
+        setError(`${response?.status} error - please try again later`);
+      }
     } finally {
       setLoading(false);
     }
@@ -72,6 +82,11 @@ export default function Home() {
         Summarize this
       </Button>
 
+      {error && (
+        <div className="text-red-500 text-sm">
+          <p>{error}</p>
+        </div>
+      )}
       <Separator />
 
       <div>
