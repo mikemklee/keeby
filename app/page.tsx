@@ -1,10 +1,13 @@
 "use client";
 
+import axios, { AxiosError } from "axios";
+import { useState } from "react";
+import { Copy } from "lucide-react";
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import axios, { AxiosError } from "axios";
-import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -57,6 +60,14 @@ export default function Home() {
 
     setSummary(response);
   };
+
+  const onCopy = () => {
+    if (!summary) return;
+
+    navigator.clipboard.writeText(summary);
+    toast.success("Copied to clipboard");
+  };
+
   return (
     <div className="max-w-xl mx-auto h-full flex flex-col gap-4 justify-center">
       <h1 className="text-5xl font-extrabold tracking-tight mb-4">tl:dr;</h1>
@@ -102,7 +113,17 @@ export default function Home() {
           ) : (
             <>
               {summary ? (
-                <p className="text-sm">{summary}</p>
+                <div className="flex flex-col">
+                  <p className="text-sm">{summary}</p>
+                  <Button
+                    onClick={onCopy}
+                    className="opacity-20 hover:opacity-100 transition ml-auto"
+                    size="icon"
+                    variant="ghost"
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                </div>
               ) : (
                 <p className="text-sm text-muted-foreground">
                   A summary will be shown here.
