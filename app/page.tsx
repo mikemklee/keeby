@@ -26,17 +26,17 @@ export default function Home() {
           </div>
           <Separator orientation="vertical" />
           <div
-            className={cn(mode === "video" ? "text-black" : "text-gray-400")}
-            onClick={() => setMode("video")}
-          >
-            Video
-          </div>
-          <Separator orientation="vertical" />
-          <div
             className={cn(mode === "audio" ? "text-black" : "text-gray-400")}
             onClick={() => setMode("audio")}
           >
             Audio
+          </div>
+          <Separator orientation="vertical" />
+          <div
+            className={cn(mode === "video" ? "text-black" : "text-gray-400")}
+            onClick={() => setMode("video")}
+          >
+            Video
           </div>
           <Separator orientation="vertical" />
           <div
