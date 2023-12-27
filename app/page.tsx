@@ -5,11 +5,12 @@ import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import TextSummarizer from "@/components/text-summarizer";
+import AudioSummarizer from "@/components/audio-summarizer";
 
 type Modes = "text" | "video" | "audio" | "pdf";
 
 export default function Home() {
-  const [mode, setMode] = useState<Modes>("text");
+  const [mode, setMode] = useState<Modes>("audio");
 
   return (
     <div className="max-w-xl mx-auto h-full flex flex-col gap-4 justify-center">
@@ -49,8 +50,8 @@ export default function Home() {
       </div>
       <div className="min-h-96 flex flex-col gap-4">
         {mode === "text" && <TextSummarizer />}
+        {mode === "audio" && <AudioSummarizer />}
         {mode === "video" && <div className="text-sm">Coming soon!</div>}
-        {mode === "audio" && <div className="text-sm">Coming soon!</div>}
         {mode === "pdf" && <div className="text-sm">Coming soon!</div>}
       </div>
     </div>
