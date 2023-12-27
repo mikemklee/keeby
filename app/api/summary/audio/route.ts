@@ -1,5 +1,4 @@
 import axios from "axios";
-import { readFileSync, writeFile, writeFileSync } from "fs";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -23,8 +22,6 @@ export async function POST(req: Request) {
         },
       }
     );
-
-    console.log("raw response", response);
 
     const { text } = await response.data;
 
