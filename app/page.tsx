@@ -6,8 +6,10 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import TextSummarizer from "@/components/text-summarizer";
 
+type Modes = "text" | "video" | "audio" | "pdf";
+
 export default function Home() {
-  const [mode, setMode] = useState<"text" | "video" | "audio">("text");
+  const [mode, setMode] = useState<Modes>("text");
 
   return (
     <div className="max-w-xl mx-auto h-full flex flex-col gap-4 justify-center">
@@ -36,12 +38,20 @@ export default function Home() {
           >
             Audio
           </div>
+          <Separator orientation="vertical" />
+          <div
+            className={cn(mode === "pdf" ? "text-black" : "text-gray-400")}
+            onClick={() => setMode("pdf")}
+          >
+            PDF
+          </div>
         </div>
       </div>
       <div className="min-h-96 flex flex-col gap-4">
         {mode === "text" && <TextSummarizer />}
         {mode === "video" && <div className="text-sm">Coming soon!</div>}
         {mode === "audio" && <div className="text-sm">Coming soon!</div>}
+        {mode === "pdf" && <div className="text-sm">Coming soon!</div>}
       </div>
     </div>
   );
