@@ -105,8 +105,8 @@ const AudioSummarizer = () => {
           htmlFor="custom-input"
           className="p-8 cursor-pointer border rounded-lg flex flex-col items-center gap-2 text-muted-foreground hover:bg-gray-100 transition-all"
         >
-          <FileVolumeIcon />
-          <span>Click here to upload a file</span>
+          <FileAudioIcon />
+          <span>{audioFile?.name || "Click here to upload a file"}</span>
         </Label>
       </div>
 
