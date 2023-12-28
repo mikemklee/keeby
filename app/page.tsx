@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import TextSummarizer from "@/components/text-summarizer";
 import AudioSummarizer from "@/components/audio-summarizer";
 
