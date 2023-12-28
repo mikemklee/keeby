@@ -2,7 +2,12 @@
 
 import axios, { AxiosError } from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Copy } from "lucide-react";
+import {
+  AudioWaveformIcon,
+  Copy,
+  FileAudioIcon,
+  FileVolumeIcon,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -94,8 +99,15 @@ const AudioSummarizer = () => {
   return (
     <>
       <div className="grid w-full gap-1.5">
-        <Label htmlFor="audioFile">Audio file</Label>
-        <input type="file" name="audioFile" onChange={onUploadFile} />
+        <Label>Audio file</Label>
+        <input type="file" id="custom-input" onChange={onUploadFile} hidden />
+        <Label
+          htmlFor="custom-input"
+          className="p-8 cursor-pointer border rounded-lg flex flex-col items-center gap-2 text-muted-foreground hover:bg-gray-100 transition-all"
+        >
+          <FileVolumeIcon />
+          <span>Click here to upload a file</span>
+        </Label>
       </div>
 
       <Button onClick={onClickButton} disabled={!audioFile}>
