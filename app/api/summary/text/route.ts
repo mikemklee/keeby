@@ -12,7 +12,8 @@ export async function POST(req: Request) {
     }
 
     const response = await axios.post(
-      "https://api-inference.huggingface.co/models/Falconsai/text_summarization",
+      // "https://api-inference.huggingface.co/models/Falconsai/text_summarization",
+      "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
       JSON.stringify({
         inputs: fullText,
       }),
