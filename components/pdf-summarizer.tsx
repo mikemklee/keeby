@@ -65,7 +65,7 @@ const PDFSummarizer = () => {
     setQuery("");
 
     try {
-      const response = await fetch("/api/chat", {
+      const response = await fetch("/api/summary/pdf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,10 +120,7 @@ const PDFSummarizer = () => {
     <>
       <div>
         <div className="mx-auto flex flex-col gap-4">
-          <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center">
-            Chat With Your Docs
-          </h1>
-          <main>
+          <main className="border rounded">
             <div>
               <div ref={messageListRef}>
                 {messages.map((message, index) => {
@@ -203,18 +200,13 @@ const PDFSummarizer = () => {
                 </form>
               </div>
             </div>
-            {error && (
-              <div className="border border-red-400 rounded-md p-4">
-                <p className="text-red-500">{error}</p>
-              </div>
-            )}
           </main>
+          {error && (
+            <div className="border border-red-400 rounded-md p-2 bg-red-50 text-sm">
+              <p className="text-red-500">{error}</p>
+            </div>
+          )}
         </div>
-        <footer className="m-auto p-4">
-          <a href="https://twitter.com/mayowaoshin">
-            Powered by LangChainAI. Demo built by Mayo (Twitter: @mayowaoshin).
-          </a>
-        </footer>
       </div>
     </>
   );

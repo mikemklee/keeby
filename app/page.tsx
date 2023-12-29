@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/cn";
 import TextSummarizer from "@/components/text-summarizer";
 import AudioSummarizer from "@/components/audio-summarizer";
+import PDFSummarizer from "@/components/pdf-summarizer";
 
 type Modes = "text" | "video" | "audio" | "pdf";
 
@@ -52,7 +53,7 @@ export default function Home() {
         {mode === "text" && <TextSummarizer />}
         {mode === "audio" && <AudioSummarizer />}
         {mode === "video" && <div className="text-sm">Coming soon!</div>}
-        {mode === "pdf" && <div className="text-sm">Coming soon!</div>}
+        {mode === "pdf" && <PDFSummarizer />}
       </div>
     </div>
   );
